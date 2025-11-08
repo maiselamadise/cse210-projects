@@ -4,8 +4,8 @@ using System.IO;
 
 public class Journal
 {
-    private List<Entry> _entries = new List<Entry>();
-    private List<string> _prompts = new List<string>
+    private List<Entry> entries = new List<Entry>();
+    private List<string> prompts = new List<string>
     {
         "Who was the most interesting person I interacted with today?",
         "What was the best part of my day?",
@@ -17,25 +17,16 @@ public class Journal
     public void AddEntry()
     {
         Random rand = new Random();
-        string prompt = _prompts[rand.Next(_prompts.Count)];
-        Console.WriteLine("Prompt: " + prompt);
-        Console.Write("Your response: ");
+        string prompt = prompts[rand.Next(prompts.Count)];
+        Console.WriteLine(prompt);
         string response = Console.ReadLine();
         string date = DateTime.Now.ToString("yyyy-MM-dd");
-        Entry newEntry = new Entry(date, prompt, response);
-        _entries.Add(newEntry);
-        Console.WriteLine("Entry added successfully!\n");
+        entries.Add(new Entry(date, prompt, response));
     }
 
     public void DisplayEntries()
     {
-        if (_entries.Count == 0)
-        {
-            Console.WriteLine("No entries to display.\n");
-            return;
-        }
-
-        foreach (Entry entry in _entries)
+        foreach (Entry entry in entries)
         {
             Console.WriteLine(entry.FormatForDisplay());
         }
@@ -45,28 +36,20 @@ public class Journal
     {
         using (StreamWriter writer = new StreamWriter(filename))
         {
-            foreach (Entry entry in _entries)
+            foreach (Entry entry in entries)
             {
                 writer.WriteLine(entry.FormatForFile());
             }
         }
-        Console.WriteLine("Journal saved successfully.\n");
     }
 
     public void LoadFromFile(string filename)
     {
-        if (!File.Exists(filename))
-        {
-            Console.WriteLine("File not found.\n");
-            return;
-        }
-
-        _entries.Clear();
+        entries.Clear();
         string[] lines = File.ReadAllLines(filename);
         foreach (string line in lines)
         {
-            _entries.Add(Entry.ParseFromFile(line));
+            entries.Add(Entry.ParseFromFile(line));
         }
-        Console.WriteLine("Journal loaded successfully.\n");
     }
 }

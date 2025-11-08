@@ -1,5 +1,3 @@
-using System;
-
 public class Entry
 {
     public string Date { get; set; }

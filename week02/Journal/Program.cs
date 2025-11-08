@@ -11,42 +11,38 @@ class Program
         {
             Console.WriteLine("Journal Menu:");
             Console.WriteLine("1. Write a new entry");
-            Console.WriteLine("2. Display all entries");
-            Console.WriteLine("3. Load entries from file");
-            Console.WriteLine("4. Save entries to file");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine("2. Display the journal");
+            Console.WriteLine("3. Save the journal to a file");
+            Console.WriteLine("4. Load the journal from a file");
+            Console.WriteLine("5. Quit");
             Console.Write("Choose an option: ");
             choice = Console.ReadLine();
 
             switch (choice)
             {
                 case "1":
-                    // Code to write a new entry
-                    Console.WriteLine("Writing a new entry...");
+                    journal.AddEntry();
                     break;
                 case "2":
-                    // Code to display all entries
-                    Console.WriteLine("Displaying all entries...");
+                    journal.DisplayEntries();
                     break;
                 case "3":
-                    // Code to load entries from file
-                    Console.WriteLine("Loading entries from file...");
+                    Console.Write("Enter filename to save: ");
+                    string saveFile = Console.ReadLine();
+                    journal.SaveToFile(saveFile);
                     break;
                 case "4":
-                    // Code to save entries to file
-                    Console.WriteLine("Saving entries to file...");
+                    Console.Write("Enter filename to load: ");
+                    string loadFile = Console.ReadLine();
+                    journal.LoadFromFile(loadFile);
                     break;
                 case "5":
-                    Console.WriteLine("Exiting the program. Goodbye!");
+                    Console.WriteLine("Goodbye!");
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again.");
+                    Console.WriteLine("Invalid option.");
                     break;
             }
         }
     }
-}
-
-internal class Journal
-{
 }
