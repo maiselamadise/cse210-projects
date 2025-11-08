@@ -1,5 +1,7 @@
 using System;
 
+// Enhancement: Each journal entry now includes a mood rating (1–5) to help track emotional patterns.
+
 class Program
 {
     static void Main(string[] args)
@@ -40,7 +42,7 @@ class Program
                     Console.WriteLine("Goodbye!");
                     break;
                 default:
-                    Console.WriteLine("Invalid option.");
+                    Console.WriteLine("Invalid option.\n");
                     break;
             }
         }
